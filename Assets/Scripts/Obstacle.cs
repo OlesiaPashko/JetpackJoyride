@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeBonus : MonoBehaviour
+public class Obstacle : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             TimeManager timeManager = TimeManager.Instance;
-            timeManager.AddTime(5);
+            timeManager.ReduceTime(10);
             Debug.Log(timeManager.time);
-            Destroy(gameObject);
         }
     }
 }
