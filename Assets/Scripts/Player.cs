@@ -9,12 +9,15 @@ public class Player : MonoBehaviour
     public Rigidbody2D rigidbody;
     public float acceleration = 0.5f;
     public int cointsCount = 0;
+    public GroundDetection groundDetection;
+    public Animator animator;
     void Start()
     {
         
     }
     void FixedUpdate()
     {
+        //animator.SetBool("IsGrounded", groundDetection.isGrounded);
         speed += acceleration;
         Vector3 direction = Vector3.right * speed;
         direction.y = rigidbody.velocity.y;
