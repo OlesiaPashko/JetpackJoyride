@@ -30,7 +30,7 @@ public class TimeManager : MonoBehaviour
     private void Update()
     {
         time -= Time.deltaTime;
-        Debug.Log("Time = " + Mathf.Round(time).ToString());
+        //Debug.Log("Time = " + Mathf.Round(time).ToString());
         if (this.time <= 0)
         {
             GameManager.Instance.EndGame();
