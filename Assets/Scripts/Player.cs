@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public float upForce = 1;
     public Rigidbody2D rigidbody;
     public float acceleration = 0.001f;
-    public int cointsCount = 0;
     public GroundDetection groundDetection;
     public Animator animator;
     void Start()

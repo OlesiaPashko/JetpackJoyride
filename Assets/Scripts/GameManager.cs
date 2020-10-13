@@ -1,11 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    public int CoinsCount { get; set; } = 0;
+    private int coinsCount = 0;
+    public int CoinsCount
+    { 
+        get { return coinsCount; }
+        set
+        {
+            coinsCount = value;
+            coinsCountText.text = coinsCount.ToString();
+        }
+    } 
+    public Text coinsCountText;
 
     public static GameManager Instance { get { return _instance; } }
 

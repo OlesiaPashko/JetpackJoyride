@@ -21,6 +21,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1659471919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191462713284821619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0ae874c3e46ed43b2e4a04b573f8f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  distance: 100
 --- !u!1001 &2887318188502455305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36,7 +50,7 @@ PrefabInstance:
     - target: {fileID: 6313890804161156730, guid: 93492e767f84463449453d5c41088a07,
         type: 3}
       propertyPath: m_Name
-      value: TimingLaser Variant
+      value: TimingLaser
       objectReference: {fileID: 0}
     - target: {fileID: 6313890804161156731, guid: 93492e767f84463449453d5c41088a07,
         type: 3}
@@ -143,7 +157,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7917000463690919286, guid: 93492e767f84463449453d5c41088a07, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 93492e767f84463449453d5c41088a07, type: 3}
 --- !u!1 &9191462713284821619 stripped
 GameObject:

@@ -10,7 +10,6 @@ public class TimeBonus : MonoBehaviour
         {
             TimeManager timeManager = TimeManager.Instance;
             timeManager.AddTime(5);
-            Debug.Log(timeManager.time);
             Destroy(gameObject);
         }
     }

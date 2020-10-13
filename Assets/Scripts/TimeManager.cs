@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
@@ -8,7 +10,18 @@ public class TimeManager : MonoBehaviour
 
     public static TimeManager Instance { get { return _instance; } }
 
-    [SerializeField] public float time { get; private set; }
+    private float time = 30f;
+    public Text timeText;
+    [SerializeField] public float TimeCount 
+    { 
+        get { return time; } 
+        private set 
+        { 
+            time = value;
+            TimeSpan span = TimeSpan.FromSeconds((double)(new decimal(time)));
+            timeText.text = span.ToString(@"mm\:ss"); 
+        } 
+    }
 
     private void Awake()
     {
@@ -22,15 +35,9 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        time = 30f;
-    }
-
     private void Update()
     {
-        time -= Time.deltaTime;
-        //Debug.Log("Time = " + Mathf.Round(time).ToString());
+        TimeCount -= Time.deltaTime;
         if (this.time <= 0)
         {
             GameManager.Instance.EndGame();
@@ -39,12 +46,12 @@ public class TimeManager : MonoBehaviour
 
     public void AddTime(int time)
     {
-        this.time += time;
+        TimeCount += time;
     }
 
     public void ReduceTime(int time)
     {
-        this.time -= time;
+        TimeCount -= time;
         if (this.time <= 0)
         {
             GameManager.Instance.EndGame();
