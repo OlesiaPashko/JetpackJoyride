@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public float speed = 4.5f;
     public float upForce = 1;
     public Rigidbody2D rigidbody;
-    public float acceleration = 0.5f;
+    public float acceleration = 0.001f;
     public int cointsCount = 0;
     public GroundDetection groundDetection;
     public Animator animator;
@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //animator.SetBool("IsGrounded", groundDetection.isGrounded);
+        animator.SetBool("isGrounded", groundDetection.isGrounded);
         speed += acceleration;
         Vector3 direction = Vector3.right * speed;
         direction.y = rigidbody.velocity.y;
@@ -26,10 +26,5 @@ public class Player : MonoBehaviour
         {
             rigidbody.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
         }
-    }
-
-    private void OnMouseDown()
-    {
-        
     }
 }
