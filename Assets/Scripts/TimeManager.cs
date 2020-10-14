@@ -15,7 +15,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] public float TimeCount 
     { 
         get { return time; } 
-        private set 
+        set 
         { 
             time = value;
             TimeSpan span = TimeSpan.FromSeconds((double)(new decimal(time)));
@@ -37,10 +37,13 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        TimeCount -= Time.deltaTime;
-        if (this.time <= 0)
+        if (!GameManager.Instance.isPause)
         {
-            GameManager.Instance.EndGame();
+            TimeCount -= Time.deltaTime;
+            if (this.time <= 0)
+            {
+                GameManager.Instance.EndGame();
+            }
         }
     }
 

@@ -18,12 +18,12 @@ public class TimingLaser : MonoBehaviour
 
     IEnumerator BehaviorCoroutine()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
 
         volumetricLineBehavior.LineWidth = 1f;
         this.gameObject.AddComponent<Obstacle>();
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         volumetricLineBehavior.LineWidth = 0.1f;
         Destroy(gameObject);
     }
