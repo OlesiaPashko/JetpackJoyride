@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -48,6 +49,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+
+        isPause = false;
+        Time.timeScale = 1;
+        gameOverCanvas.gameObject.SetActive(false);
+    }
+
     public void EndGame()
     {
         Debug.Log("END OF GAME");
@@ -81,10 +90,12 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Debug.Log("Restarts game");
+        
     }
 
-    public void StartGame()
+    public void GoToMenu()
     {
-
+        SceneManager.LoadScene("MainMenu");
     }
+
 }
