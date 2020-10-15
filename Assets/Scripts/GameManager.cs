@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,18 @@ public class GameManager : MonoBehaviour
     private int coinsCount = 0;
     public Canvas gameOverCanvas;
     public bool isPause = false;
+    private float score = 0f;
+    public Text coinsCountText;
+    public Text scoreText;
+    public float Score
+    {
+        get { return score; }
+        set
+        {
+            score = value;
+            scoreText.text = ((int)score).ToString();
+        }
+    }
     public int CoinsCount
     { 
         get { return coinsCount; }
@@ -18,7 +31,7 @@ public class GameManager : MonoBehaviour
             coinsCountText.text = coinsCount.ToString();
         }
     } 
-    public Text coinsCountText;
+    
 
     public static GameManager Instance { get { return _instance; } }
 
@@ -40,6 +53,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("END OF GAME");
         PauseGame();
         gameOverCanvas.gameObject.SetActive(true);
+        gameOverCanvas.GetComponentsInChildren<Text>().First(x => x.name == "CoinsCount").text = CoinsCount.ToString();
+        gameOverCanvas.GetComponentsInChildren<Text>().First(x => x.name == "LivesCount").text = "1";
+        gameOverCanvas.GetComponentsInChildren<Text>().First(x => x.name == "Score").text = ((int)score).ToString();
     }
 
     public void PauseGame()
@@ -60,5 +76,15 @@ public class GameManager : MonoBehaviour
     {
         TimeManager.Instance.TimeCount = 30;
         ResumeGame();
+    }
+
+    public void RestartGame()
+    {
+        Debug.Log("Restarts game");
+    }
+
+    public void StartGame()
+    {
+
     }
 }

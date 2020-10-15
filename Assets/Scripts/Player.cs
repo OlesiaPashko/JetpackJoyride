@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
         Vector3 direction = Vector3.right * speed;
         direction.y = rigidbody.velocity.y;
         rigidbody.velocity = direction;
+        GameManager.Instance.Score += speed * Time.deltaTime;
         if (Input.GetButton("Jump")) 
         {
             rigidbody.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);

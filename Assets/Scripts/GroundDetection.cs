@@ -10,6 +10,16 @@ public class GroundDetection : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             isGrounded = true;
+            Debug.Log("IsGrounded = " + isGrounded);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            isGrounded = true;
+            Debug.Log("IsGrounded = " + isGrounded);
         }
     }
 
@@ -18,6 +28,7 @@ public class GroundDetection : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             isGrounded = false;
+            Debug.Log("IsGrounded = " + isGrounded);
         }
     }
 }
