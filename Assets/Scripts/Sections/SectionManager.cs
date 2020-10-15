@@ -39,4 +39,16 @@ public class SectionManager : MonoBehaviour
         Destroy(spawnedSections[0].gameObject);
         spawnedSections.RemoveAt(0);
     }
+
+    public void Restart()
+    {
+        Player player = FindObjectOfType<Player>();
+        foreach(var spawnedSection in spawnedSections)
+        {
+            Destroy(spawnedSection.gameObject);
+        }
+        spawnedSections = new List<Section>();
+        Start();
+        player.gameObject.transform.position = spawnedSections[1].transform.position + new Vector3(4f, 5f, 0f);
+    }
 }

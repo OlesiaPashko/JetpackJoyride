@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
         isPause = false;
         Time.timeScale = 1;
         gameOverCanvas.gameObject.SetActive(false);
@@ -63,8 +62,11 @@ public class GameManager : MonoBehaviour
         PauseGame();
         gameOverCanvas.gameObject.SetActive(true);
         gameOverCanvas.GetComponentsInChildren<Text>().First(x => x.name == "CoinsCount").text = CoinsCount.ToString();
-        gameOverCanvas.GetComponentsInChildren<Text>().First(x => x.name == "LivesCount").text = "1";
+        gameOverCanvas.GetComponentsInChildren<Text>().First(x => x.name == "LivesCount").text = DataHolder.GetAmount(ShopItem.Life).ToString();
         gameOverCanvas.GetComponentsInChildren<Text>().First(x => x.name == "Score").text = ((int)score).ToString();
+        DataHolder.AddCoinsCount(CoinsCount);
+        if (IsMaxScore())
+            DataHolder.SetMaxScore((int)score);
     }
 
     public void PauseGame()
@@ -83,14 +85,31 @@ public class GameManager : MonoBehaviour
 
     public void UseExtraLive()
     {
-        TimeManager.Instance.TimeCount = 30;
-        ResumeGame();
+        if (DataHolder.TryDecrementAmount(ShopItem.Life))
+        {
+            TimeManager.Instance.TimeCount = 30;
+            ResumeGame();
+        }
+        else
+        {
+            Debug.Log("You don`t have extra lives. Do to shop to buy some");
+        }
     }
 
     public void RestartGame()
     {
         Debug.Log("Restarts game");
-        
+        DataHolder.AddCoinsCount(CoinsCount);
+        coinsCount = 0;
+        score = 0f;
+        Start();
+        TimeManager.Instance.TimeCount = 30f;
+        SectionManager.Instance.Restart();
+    }
+
+    private bool IsMaxScore()
+    {
+        return (score > DataHolder.GetMaxScore());
     }
 
     public void GoToMenu()
