@@ -8,6 +8,7 @@ public class SectionEndingCollider : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Disabled"))
         {
+            Debug.Log("TriggerEnter");
             SectionManager sectionManager = SectionManager.Instance;
             sectionManager.SpawnSection();
         }

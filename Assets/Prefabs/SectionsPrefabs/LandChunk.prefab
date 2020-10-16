@@ -319,7 +319,6 @@ GameObject:
   - component: {fileID: 8940167839761897261}
   - component: {fileID: 8940167839761897262}
   - component: {fileID: 141781452}
-  - component: {fileID: -1108120301711452202}
   m_Layer: 0
   m_Name: LandChunk
   m_TagString: Untagged
@@ -378,20 +377,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8323c57614cb0a2448f8007b21e24ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1108120301711452202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8940167839761897259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde0ceb4a15045c4ea8286ca83389d57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RocketPrefab: {fileID: 1984715141532449615, guid: 32c2c96092515bd4cb11020c6a9c0502,
-    type: 3}
 --- !u!1001 &3670845584334720180
 PrefabInstance:
   m_ObjectHideFlags: 0

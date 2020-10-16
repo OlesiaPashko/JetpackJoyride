@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1984715141532449615}
   - component: {fileID: 1984715141532449608}
   - component: {fileID: 1479567722}
+  - component: {fileID: 182853267698821024}
   m_Layer: 0
   m_Name: rocket
   m_TagString: Untagged
@@ -120,6 +121,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   rigidbody: {fileID: 1984715141532449614}
+  animator: {fileID: 182853267698821024}
+  player: {fileID: 0}
+  isWarning: 1
 --- !u!61 &1984715141532449608
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -133,7 +137,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.10505915, y: -0.013134956}
+  m_Offset: {x: -0.12804556, y: -0.013134956}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -144,7 +148,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7898817, y: 0.6076546}
+  m_Size: {x: 1.541626, y: 0.6076546}
   m_EdgeRadius: 0
 --- !u!114 &1479567722
 MonoBehaviour:
@@ -158,3 +162,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4f6547d7701004b943dda04a67f17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &182853267698821024
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984715141532449611}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e468d2c2dc34cff408d85dcb6893e4aa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

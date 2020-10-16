@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class SectionManager : MonoBehaviour
     public Section[] FirstPrefabs;
     private List<Section> spawnedSections = new List<Section>();
     private static SectionManager _instance;
-
+    public event Action<float> SpawnObstacles;
     public static SectionManager Instance { get { return _instance; } }
 
 
@@ -31,13 +32,16 @@ public class SectionManager : MonoBehaviour
     }
     public void SpawnSection()
     {
-        Section newSection = Instantiate(SectionPrefabs[Random.Range(0, SectionPrefabs.Length)]);
+        Section newSection = Instantiate(SectionPrefabs[UnityEngine.Random.Range(0, SectionPrefabs.Length)]);
         Vector3 lastElementPosition = spawnedSections[spawnedSections.Count - 1].transform.position;
         float x = lastElementPosition.x + (lastElementPosition.x - spawnedSections[spawnedSections.Count - 2].transform.position.x);
-        newSection.transform.position = new Vector3(x, lastElementPosition.y, lastElementPosition.z);
+        Vector3 positionToSpawn = new Vector3(x, lastElementPosition.y, lastElementPosition.z);
+        newSection.transform.position = positionToSpawn;
         spawnedSections.Add(newSection);
         Destroy(spawnedSections[0].gameObject);
         spawnedSections.RemoveAt(0);
+
+        SpawnObstacles?.Invoke(positionToSpawn.x);
     }
 
     public void Restart()

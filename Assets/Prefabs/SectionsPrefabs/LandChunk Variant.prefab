@@ -880,10 +880,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1108120301711452202, guid: d3dd4593456b48c4d8d4eed46c7dcb01,
+        type: 3}
+      propertyPath: rocketX
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8940167839761897259, guid: d3dd4593456b48c4d8d4eed46c7dcb01,
         type: 3}
       propertyPath: m_Name
-      value: LandChunk
+      value: LandChunk Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8940167839761897261, guid: d3dd4593456b48c4d8d4eed46c7dcb01,
         type: 3}

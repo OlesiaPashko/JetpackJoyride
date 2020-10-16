@@ -5,16 +5,19 @@ using UnityEngine;
 public class RocketsManager : MonoBehaviour
 {
     public Rocket RocketPrefab;
-    //public Vector3 initPosition;
-    // Start is called before the first frame update
+    public bool done = false;
     void Start()
     {
-        
+        SectionManager.Instance.SpawnObstacles += SpawnRocket;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SpawnRocket(float x)
     {
-        
+        if (!done)
+        {
+            Instantiate(RocketPrefab, new Vector3(x, 0f, 0f), Quaternion.identity);
+            Debug.Log("Rocket was spawned");
+            done = true;
+        }
     }
 }

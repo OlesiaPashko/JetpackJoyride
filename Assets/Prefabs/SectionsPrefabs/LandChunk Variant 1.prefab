@@ -1028,10 +1028,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1108120301711452202, guid: d3dd4593456b48c4d8d4eed46c7dcb01,
+        type: 3}
+      propertyPath: rocketX
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8940167839761897259, guid: d3dd4593456b48c4d8d4eed46c7dcb01,
         type: 3}
       propertyPath: m_Name
-      value: LandChunk
+      value: LandChunk Variant 1
       objectReference: {fileID: 0}
     - target: {fileID: 8940167839761897261, guid: d3dd4593456b48c4d8d4eed46c7dcb01,
         type: 3}
@@ -1088,7 +1093,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -1108120301711452202, guid: d3dd4593456b48c4d8d4eed46c7dcb01, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d3dd4593456b48c4d8d4eed46c7dcb01, type: 3}
 --- !u!4 &4838766391209395636 stripped
 Transform:
