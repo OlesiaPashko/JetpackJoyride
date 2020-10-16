@@ -13,7 +13,9 @@ public class Player : MonoBehaviour
     public AnimatorOverrideController knightAnimator;
     void Start()
     {
-        animator.runtimeAnimatorController = knightAnimator as RuntimeAnimatorController;
+        Skins activeSkin = DataHolder.GetActiveSkin();
+        if(activeSkin == Skins.Knight)
+            animator.runtimeAnimatorController = knightAnimator as RuntimeAnimatorController;
     }
     void FixedUpdate()
     {

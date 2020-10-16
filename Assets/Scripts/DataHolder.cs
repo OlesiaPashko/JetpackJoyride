@@ -4,6 +4,37 @@ using UnityEngine;
 
 public static class DataHolder
 {
+
+    static DataHolder()
+    {
+        SetBought(Skins.Default);
+        SetActiveSkin(Skins.Default);
+    }
+
+    public static Skins GetActiveSkin()
+    {
+        return (Skins)PlayerPrefs.GetInt("ActiveSkin");
+    }
+
+    public static void SetActiveSkin(Skins skin)
+    {
+        PlayerPrefs.SetInt("ActiveSkin", (int)skin);
+    }
+
+    public static bool IsBought(Skins skin)
+    {
+        return PlayerPrefs.GetInt(skin.ToString(), 0) > 0;
+    }
+
+    public static void SetBought(Skins skin)
+    {
+        PlayerPrefs.SetInt(skin.ToString(), 1);
+    }
+
+    public static void SetUnbought(Skins skin)//for testing
+    {
+        PlayerPrefs.SetInt(skin.ToString(), 0);
+    }
     public static int GetMaxScore()
     {
         return PlayerPrefs.GetInt("MaxScore");
