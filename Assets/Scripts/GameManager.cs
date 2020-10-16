@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private float score = 0f;
     public Text coinsCountText;
     public Text scoreText;
+    public Player player;
     public float Score
     {
         get { return score; }
@@ -54,6 +55,20 @@ public class GameManager : MonoBehaviour
         isPause = false;
         Time.timeScale = 1;
         gameOverCanvas.gameObject.SetActive(false);
+        if (DataHolder.GetAmount(ShopItem.Boost) > 0)
+        {
+            DataHolder.TryDecrementAmount(ShopItem.Boost);
+            StartCoroutine(Boost());            
+        }
+    }
+
+    private IEnumerator Boost()
+    {
+        player.gameObject.tag = "Disabled";
+        player.speed += 60f;
+        yield return new WaitForSeconds(7.5f);
+        player.speed -= 51.5f;
+        player.gameObject.tag = "Player";
     }
 
     public void EndGame()

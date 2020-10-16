@@ -841,7 +841,7 @@ MonoBehaviour:
   canvas: {fileID: 921149962}
   sprites:
   - {fileID: 21300000, guid: 8cf70548f9c5917419dc6e47a7d690a0, type: 3}
-  - {fileID: 21300000, guid: 51970344bfa47794a8d6201b8704a361, type: 3}
+  - {fileID: 21300000, guid: ddd7ceda23e4a0a41aef720df115948a, type: 3}
   coinsCount: {fileID: 1969791995}
 --- !u!4 &1554670346
 Transform:
