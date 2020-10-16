@@ -10,9 +10,10 @@ public class Player : MonoBehaviour
     public float acceleration = 0.001f;
     public GroundDetection groundDetection;
     public Animator animator;
+    public AnimatorOverrideController knightAnimator;
     void Start()
     {
-        
+        animator.runtimeAnimatorController = knightAnimator as RuntimeAnimatorController;
     }
     void FixedUpdate()
     {
