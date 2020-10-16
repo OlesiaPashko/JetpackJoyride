@@ -86,9 +86,16 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("GAME Is On Pause");
-        isPause = true;
-        Time.timeScale = 0;
+        if (isPause)
+        {
+            isPause = false;
+            Time.timeScale = 1;
+        }
+        else
+        {
+            isPause = true;
+            Time.timeScale = 0;
+        }
     }
 
     public void ResumeGame()
