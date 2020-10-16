@@ -9,7 +9,7 @@ public class SectionManager : MonoBehaviour
     public Section[] FirstPrefabs;
     private List<Section> spawnedSections = new List<Section>();
     private static SectionManager _instance;
-    public event Action<float> SpawnObstacles;
+    public event Action SpawnObstacles;
     public static SectionManager Instance { get { return _instance; } }
 
 
@@ -41,7 +41,7 @@ public class SectionManager : MonoBehaviour
         Destroy(spawnedSections[0].gameObject);
         spawnedSections.RemoveAt(0);
 
-        SpawnObstacles?.Invoke(positionToSpawn.x);
+        SpawnObstacles?.Invoke();
     }
 
     public void Restart()

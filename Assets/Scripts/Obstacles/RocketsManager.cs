@@ -11,11 +11,11 @@ public class RocketsManager : MonoBehaviour
         SectionManager.Instance.SpawnObstacles += SpawnRocket;
     }
 
-    private void SpawnRocket(float x)
+    private void SpawnRocket()
     {
         if (!done)
         {
-            Instantiate(RocketPrefab, new Vector3(x, 0f, 0f), Quaternion.identity);
+            Instantiate(RocketPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
             Debug.Log("Rocket was spawned");
             done = true;
         }

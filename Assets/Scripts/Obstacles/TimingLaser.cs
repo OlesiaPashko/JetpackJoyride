@@ -20,7 +20,7 @@ public class TimingLaser : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        volumetricLineBehavior.LineWidth = 1f;
+        volumetricLineBehavior.LineWidth = 2f;
         this.gameObject.AddComponent<Obstacle>();
 
         yield return new WaitForSeconds(2);
@@ -31,6 +31,6 @@ public class TimingLaser : MonoBehaviour
     private void FixedUpdate()
     {
         var playerPos = player.gameObject.transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPos.x+1.5f, transform.position.y, transform.position.z), distance);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPos.x+2.5f, transform.position.y, transform.position.z), distance);
     }
 }
