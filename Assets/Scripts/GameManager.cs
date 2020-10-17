@@ -55,7 +55,8 @@ public class GameManager : MonoBehaviour
         isPause = false;
         Time.timeScale = 1;
         gameOverCanvas.gameObject.SetActive(false);
-        if (DataHolder.GetAmount(ShopItem.Boost) > 0)
+        int boostsAmount = DataHolder.GetAmount(ShopItem.Boost);
+        if (boostsAmount > 0)
         {
             DataHolder.TryDecrementAmount(ShopItem.Boost);
             StartCoroutine(Boost());            
@@ -69,6 +70,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(7.5f);
         player.speed -= 51.5f;
         player.gameObject.tag = "Player";
+        if (DataHolder.TryDecrementAmount(ShopItem.Boost))
+        {
+            StartCoroutine(Boost());
+        }
+        TimeManager.Instance.TimeCount = 30f;
     }
 
     public void EndGame()
@@ -126,6 +132,7 @@ public class GameManager : MonoBehaviour
         score = 0f;
         Start();
         TimeManager.Instance.TimeCount = 30f;
+        player.speed = 4.5f;
         SectionManager.Instance.Restart();
     }
 

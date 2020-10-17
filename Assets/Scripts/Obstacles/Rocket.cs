@@ -14,20 +14,25 @@ public class Rocket : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
+        if (player.gameObject.CompareTag("Disabled"))
+        {
+            Destroy(gameObject);
+            return;
+        }
         StartCoroutine(RocketBehavior());
     }
 
     public IEnumerator RocketBehavior()
     {
-        Vector3 direction = Vector3.left * speed;
-        direction.y = rigidbody.velocity.y;
-        rigidbody.velocity = direction;
-        yield return new WaitForSeconds(3f);
-        isWarning = false;
-        animator.SetTrigger("StartFly");
-        yield return new WaitForSeconds(3f);
-        isWarning = true;
-        Destroy(gameObject);
+            Vector3 direction = Vector3.left * speed;
+            direction.y = rigidbody.velocity.y;
+            rigidbody.velocity = direction;
+            yield return new WaitForSeconds(3f);
+            isWarning = false;
+            animator.SetTrigger("StartFly");
+            yield return new WaitForSeconds(3f);
+            isWarning = true;
+            Destroy(gameObject);
     }
 
     private void Update()
