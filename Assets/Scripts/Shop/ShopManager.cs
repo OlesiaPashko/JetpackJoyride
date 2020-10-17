@@ -110,10 +110,13 @@ public class ShopManager : MonoBehaviour
 
     private void SpawnItems()
     {
-        float y = 230.5f;//start y coord to spawn
+        float scaleFactor = canvas.scaleFactor;
+        ShopItem.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+        float y = (canvas.pixelRect.y + (canvas.pixelRect.height / 2)) + 50f * scaleFactor;
+        float xToSpawn = (canvas.pixelRect.x + (canvas.pixelRect.width / 2));
         foreach (var item in items)
         {
-            GameObject shopItem = Instantiate(ShopItem, new Vector3(328f, y, 0f), Quaternion.identity);
+            GameObject shopItem = Instantiate(ShopItem, new Vector3(xToSpawn, y, 0f), Quaternion.identity);
             Text[] texts = shopItem.GetComponentsInChildren<Text>();
             texts.First(x => x.name == "Price").text = item.Value.Price.ToString();
             texts.First(x => x.name == "Name").text = item.Key.ToString();
@@ -121,7 +124,7 @@ public class ShopManager : MonoBehaviour
             shopItem.GetComponentsInChildren<Image>().First(x => x.name == "Image").sprite = item.Value.Image;
             shopItem.GetComponentsInChildren<Button>().First(x => x.name == "Buy").onClick.AddListener(() => Buy(item.Key));
             shopItem.transform.parent = canvas.transform;
-            y -= 50f;
+            y -= 50f * scaleFactor;
             spawnedItems.Add(item.Key, shopItem);
         }
     }
@@ -137,10 +140,13 @@ public class ShopManager : MonoBehaviour
 
     private void SpawnSkins()
     {
-        float y = 129.5f;//start y coord to spawn
+        float scaleFactor = canvas.scaleFactor;
+        skinItem.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+        float y = (canvas.pixelRect.y + (canvas.pixelRect.height / 2)) - 50f * scaleFactor;
+        float xToSpawn = (canvas.pixelRect.x + (canvas.pixelRect.width / 2));
         foreach (var skin in skins)
         {
-            GameObject skinObject = Instantiate(skinItem, new Vector3(328f, y, 0f), Quaternion.identity);
+            GameObject skinObject = Instantiate(skinItem, new Vector3(xToSpawn, y, 0f), Quaternion.identity);
             skinObject.GetComponentsInChildren<Text>().First(x => x.name == "Name").text = skin.Key.ToString();
             skinObject.GetComponentsInChildren<Image>().First(x => x.name == "Image").sprite = skin.Value.Image;
 
@@ -155,7 +161,7 @@ public class ShopManager : MonoBehaviour
                 SpawnNotBoughtSkin(skin, skinObject);
             }
             skinObject.transform.parent = canvas.transform;
-            y -= 50f;
+            y -= 50f * scaleFactor;
             spawnedSkins.Add(skin.Key, skinObject);
         }
     }
