@@ -9,12 +9,10 @@ public class Rocket : MonoBehaviour
     public Animator animator;
     public Player player;
     public bool isWarning = true;
-
-    // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Player>();
-        if (player.gameObject.CompareTag("Disabled"))
+        if (player.gameObject.CompareTag("Disabled"))//there are no rockets in boost mode
         {
             Destroy(gameObject);
             return;
@@ -28,10 +26,11 @@ public class Rocket : MonoBehaviour
             direction.y = rigidbody.velocity.y;
             rigidbody.velocity = direction;
             yield return new WaitForSeconds(3f);
+
             isWarning = false;
             animator.SetTrigger("StartFly");
             yield return new WaitForSeconds(3f);
-            isWarning = true;
+
             Destroy(gameObject);
     }
 

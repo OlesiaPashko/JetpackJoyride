@@ -15,19 +15,27 @@ public class Player : MonoBehaviour
     {
         Skins activeSkin = DataHolder.GetActiveSkin();
         if(activeSkin == Skins.Knight)
-            animator.runtimeAnimatorController = knightAnimator as RuntimeAnimatorController;
+            animator.runtimeAnimatorController = knightAnimator;
     }
     void FixedUpdate()
     {
         animator.SetBool("isGrounded", groundDetection.isGrounded);
+
+        MoveForward();
+
+        if (Input.GetButton("Jump"))
+        {
+            rigidbody.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
+        }
+
+        GameManager.Instance.Score += speed * Time.deltaTime;
+    }
+
+    private void MoveForward()
+    {
         speed += acceleration;
         Vector3 direction = Vector3.right * speed;
         direction.y = rigidbody.velocity.y;
         rigidbody.velocity = direction;
-        GameManager.Instance.Score += speed * Time.deltaTime;
-        if (Input.GetButton("Jump")) 
-        {
-            rigidbody.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
-        }
     }
 }

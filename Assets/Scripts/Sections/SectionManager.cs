@@ -9,6 +9,7 @@ public class SectionManager : MonoBehaviour
     public Section[] FirstPrefabs;
     private List<Section> spawnedSections = new List<Section>();
     private static SectionManager _instance;
+    public Player player;
     public event Action SpawnObstacles;
     public static SectionManager Instance { get { return _instance; } }
 
@@ -33,20 +34,26 @@ public class SectionManager : MonoBehaviour
     public void SpawnSection()
     {
         Section newSection = Instantiate(SectionPrefabs[UnityEngine.Random.Range(0, SectionPrefabs.Length)]);
-        Vector3 lastElementPosition = spawnedSections[spawnedSections.Count - 1].transform.position;
-        float x = lastElementPosition.x + (lastElementPosition.x - spawnedSections[spawnedSections.Count - 2].transform.position.x);
-        Vector3 positionToSpawn = new Vector3(x, lastElementPosition.y, lastElementPosition.z);
-        newSection.transform.position = positionToSpawn;
+
+        newSection.transform.position = GetPositionToSpawn();
         spawnedSections.Add(newSection);
+
         Destroy(spawnedSections[0].gameObject);
         spawnedSections.RemoveAt(0);
 
         SpawnObstacles?.Invoke();
     }
 
+    private Vector3 GetPositionToSpawn()
+    {
+        Vector3 lastElementPosition = spawnedSections[spawnedSections.Count - 1].transform.position;
+        float sectorWidth = lastElementPosition.x - spawnedSections[spawnedSections.Count - 2].transform.position.x;
+        float x = lastElementPosition.x + sectorWidth;
+        return new Vector3(x, lastElementPosition.y, lastElementPosition.z);
+    }
+
     public void Restart()
     {
-        Player player = FindObjectOfType<Player>();
         foreach(var spawnedSection in spawnedSections)
         {
             Destroy(spawnedSection.gameObject);

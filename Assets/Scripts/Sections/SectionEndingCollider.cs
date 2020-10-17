@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SectionEndingCollider : MonoBehaviour
 {
@@ -8,7 +6,6 @@ public class SectionEndingCollider : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Disabled"))
         {
-            Debug.Log("TriggerEnter");
             SectionManager sectionManager = SectionManager.Instance;
             sectionManager.SpawnSection();
         }

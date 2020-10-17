@@ -4,11 +4,10 @@ using UnityEngine;
 
 public static class DataHolder
 {
-
     static DataHolder()
     {
         SetBought(Skins.Default);
-        SetActiveSkin(Skins.Default);
+        SetActiveSkin(Skins.Default);//this couses bug but I don`t know how make it better
     }
 
     public static Skins GetActiveSkin()

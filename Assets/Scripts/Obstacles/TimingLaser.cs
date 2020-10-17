@@ -22,7 +22,6 @@ public class TimingLaser : MonoBehaviour
         this.gameObject.AddComponent<Obstacle>();
 
         yield return new WaitForSeconds(2);
-        volumetricLineBehavior.LineWidth = 0.1f;
         Destroy(gameObject);
     }
 

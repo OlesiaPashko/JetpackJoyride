@@ -13,10 +13,10 @@ public class RocketsManager : MonoBehaviour
 
     private void SpawnRocket()
     {
-        if (!done)
+        //To DO debug in better way
+        if (!done)//without this if 4 rockets instantiates.
         {
             Instantiate(RocketPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
-            Debug.Log("Rocket was spawned");
             done = true;
         }
     }

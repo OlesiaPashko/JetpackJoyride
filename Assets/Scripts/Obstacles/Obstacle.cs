@@ -10,7 +10,6 @@ public class Obstacle : MonoBehaviour
         {
             TimeManager timeManager = TimeManager.Instance;
             timeManager.ReduceTime(10);
-            Debug.Log("OBSTACLE " + timeManager.TimeCount);
         }
     }
 }

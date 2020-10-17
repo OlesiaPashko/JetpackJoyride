@@ -55,11 +55,17 @@ public class GameManager : MonoBehaviour
         isPause = false;
         Time.timeScale = 1;
         gameOverCanvas.gameObject.SetActive(false);
+
+        UseBoosts();
+    }
+
+    private void UseBoosts()
+    {
         int boostsAmount = DataHolder.GetAmount(ShopItem.Boost);
         if (boostsAmount > 0)
         {
             DataHolder.TryDecrementAmount(ShopItem.Boost);
-            StartCoroutine(Boost());            
+            StartCoroutine(Boost());
         }
     }
 
@@ -68,7 +74,8 @@ public class GameManager : MonoBehaviour
         player.gameObject.tag = "Disabled";
         player.speed += 60f;
         yield return new WaitForSeconds(7.5f);
-        player.speed -= 51.5f;
+
+        player.speed -= 51.5f;//boost speed minus acceleration
         player.gameObject.tag = "Player";
         if (DataHolder.TryDecrementAmount(ShopItem.Boost))
         {
@@ -79,12 +86,14 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
-        Debug.Log("END OF GAME");
         PauseGame();
+
         gameOverCanvas.gameObject.SetActive(true);
-        gameOverCanvas.GetComponentsInChildren<Text>().First(x => x.name == "CoinsCount").text = CoinsCount.ToString();
-        gameOverCanvas.GetComponentsInChildren<Text>().First(x => x.name == "LivesCount").text = DataHolder.GetAmount(ShopItem.Life).ToString();
-        gameOverCanvas.GetComponentsInChildren<Text>().First(x => x.name == "Score").text = ((int)score).ToString();
+        Text[] texts = gameOverCanvas.GetComponentsInChildren<Text>();
+        texts.First(x => x.name == "CoinsCount").text = CoinsCount.ToString();
+        texts.First(x => x.name == "LivesCount").text = DataHolder.GetAmount(ShopItem.Life).ToString();
+        texts.First(x => x.name == "Score").text = ((int)score).ToString();
+
         DataHolder.AddCoinsCount(CoinsCount);
         if (IsMaxScore())
             DataHolder.SetMaxScore((int)score);
@@ -126,11 +135,12 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Debug.Log("Restarts game");
         DataHolder.AddCoinsCount(CoinsCount);
         coinsCount = 0;
         score = 0f;
+
         Start();
+
         TimeManager.Instance.TimeCount = 30f;
         player.speed = 4.5f;
         SectionManager.Instance.Restart();
