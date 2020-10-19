@@ -1,5 +1,5 @@
 ﻿
-public enum ShopItem
+public enum Bonus
 {
     Life,
     Boost

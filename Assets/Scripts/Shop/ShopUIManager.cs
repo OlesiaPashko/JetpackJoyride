@@ -8,30 +8,30 @@ using UnityEngine.UI;
 public class ShopUIManager : MonoBehaviour
 {
 
-    public ShopItemUI shopItem;
+    public BonusItemUI bonusItem;
     public SkinItemUI skinItem;
     public Canvas canvas;
-    public Sprite[] sprites;
+    public Sprite[] bonusImages;
     public Sprite[] skinImages;
     public Text coinsCount;
-    private List<ShopItemDetails> items;
+    private List<BonusDetails> bonuses;
     private List<SkinDetails> skins;
     private float itemHeight = 50f;
 
     void Start()
     {
-        DataHolder.SetUnbought(Skins.Knight);//for testing
         coinsCount.text = DataHolder.GetCoinsCount().ToString();
 
-        SetItems();
+        SetBonuses();
         SetSkins();
 
-        SpawnItems();
+        SpawnBonuses();
         SpawnSkins();
     }
 
     private void Update()
     {
+        //Show coins count
         coinsCount.text = DataHolder.GetCoinsCount().ToString();
     }
 
@@ -46,12 +46,12 @@ public class ShopUIManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    private void SetItems() 
+    private void SetBonuses() 
     {
-        items = new List<ShopItemDetails>()
+        bonuses = new List<BonusDetails>()
         {
-            new ShopItemDetails(){ ShopItem = ShopItem.Life, Amount = DataHolder.GetAmount(global::ShopItem.Life), Image = sprites[0], Price = 20 },
-            new ShopItemDetails(){ ShopItem = ShopItem.Boost, Amount = DataHolder.GetAmount(global::ShopItem.Boost), Image = sprites[1], Price = 20 } 
+            new BonusDetails(){ Bonus = Bonus.Life, Amount = DataHolder.GetAmount(global::Bonus.Life), Image = bonusImages[0], Price = 20 },
+            new BonusDetails(){ Bonus = Bonus.Boost, Amount = DataHolder.GetAmount(global::Bonus.Boost), Image = bonusImages[1], Price = 20 } 
         };
     }
 
@@ -65,41 +65,44 @@ public class ShopUIManager : MonoBehaviour
     }
 
 
-    private void SpawnItems()
+    private void SpawnBonuses()
     {
+        //Scale bonus prefab
         float scaleFactor = canvas.scaleFactor;
+        bonusItem.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
 
-        shopItem.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
-
-        float y = (canvas.pixelRect.y + (canvas.pixelRect.height / 2)) + itemHeight * scaleFactor;
+        //Get coords to instatiate bonus items
+        float yToSpawn = (canvas.pixelRect.y + (canvas.pixelRect.height / 2)) + itemHeight * scaleFactor;
         float xToSpawn = (canvas.pixelRect.x + (canvas.pixelRect.width / 2));
 
-        foreach (var item in items)
+        //Instantiate all bonuses inside canvas
+        foreach (var bonus in bonuses)
         {
-            ShopItemUI itemUI = Instantiate(shopItem, new Vector3(xToSpawn, y, 0f), Quaternion.identity);
-
-            itemUI.Init(item);
-
-            itemUI.transform.parent = canvas.transform;
-
-            y -= itemHeight * scaleFactor;
+            BonusItemUI bonusUI = Instantiate(bonusItem, new Vector3(xToSpawn, yToSpawn, 0f), Quaternion.identity);
+            bonusUI.Init(bonus);
+            bonusUI.transform.parent = canvas.transform;
+            yToSpawn -= itemHeight * scaleFactor;
         }
     }
 
 
     private void SpawnSkins()
     {
+        //Scale bonus prefab
         float scaleFactor = canvas.scaleFactor;
         skinItem.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
-        float y = (canvas.pixelRect.y + (canvas.pixelRect.height / 2)) - itemHeight * scaleFactor;
+
+        //Get coords to instatiate skins
+        float yToSpawn = (canvas.pixelRect.y + (canvas.pixelRect.height / 2)) - itemHeight * scaleFactor;
         float xToSpawn = (canvas.pixelRect.x + (canvas.pixelRect.width / 2));
 
+        //Instantiate all skins inside canvas
         foreach (var skin in skins)
         {
-            SkinItemUI skinObject = Instantiate(skinItem, new Vector3(xToSpawn, y, 0f), Quaternion.identity);
-            skinObject.Init(skin);
-            skinObject.transform.parent = canvas.transform;
-            y -= itemHeight * scaleFactor;
+            SkinItemUI skinUI = Instantiate(skinItem, new Vector3(xToSpawn, yToSpawn, 0f), Quaternion.identity);
+            skinUI.Init(skin);
+            skinUI.transform.parent = canvas.transform;
+            yToSpawn -= itemHeight * scaleFactor;
         }
     }
 

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopItemDetails
+public class BonusDetails
 {
-    public ShopItem ShopItem;
+    public Bonus Bonus;
     public int Price = 0;
     public Sprite Image;
     public int Amount = 0;

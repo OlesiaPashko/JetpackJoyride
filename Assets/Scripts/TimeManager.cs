@@ -51,11 +51,13 @@ public class TimeManager : MonoBehaviour
     public void AddTime(int time)
     {
         TimeCount += time;
+        GameUIManager.Instance.ShowTimeBonus();
     }
 
     public void ReduceTime(int time)
     {
         TimeCount -= time;
+        GameUIManager.Instance.ShowTimeFine();
         if (this.time <= 0)
         {
             GameManager.Instance.EndGame();

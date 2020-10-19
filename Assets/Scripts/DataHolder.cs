@@ -69,19 +69,19 @@ public static class DataHolder
         }
         return false;
     }
-    public static int GetAmount(ShopItem item)
+    public static int GetAmount(Bonus item)
     {
         return PlayerPrefs.GetInt(item.ToString());
     }
 
-    public static void IncrementAmount(ShopItem item)
+    public static void IncrementAmount(Bonus item)
     {
         int amount = GetAmount(item);
         PlayerPrefs.SetInt(item.ToString(), ++amount);
         PlayerPrefs.Save();
     }
 
-    public static bool TryDecrementAmount(ShopItem item)
+    public static bool TryDecrementAmount(Bonus item)
     {
         int amount = GetAmount(item);
         if(amount > 0)

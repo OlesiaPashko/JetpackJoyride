@@ -59,10 +59,10 @@ public class GameManager : MonoBehaviour
 
     private void UseBoosts()
     {
-        int boostsAmount = DataHolder.GetAmount(ShopItem.Boost);
+        int boostsAmount = DataHolder.GetAmount(Bonus.Boost);
         if (boostsAmount > 0)
         {
-            DataHolder.TryDecrementAmount(ShopItem.Boost);
+            DataHolder.TryDecrementAmount(Bonus.Boost);
             StartCoroutine(Boost());
         }
     }
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 
         player.speed -= SettingsManager.Instance.endBoostAcceleration;
         player.gameObject.tag = "Player";
-        if (DataHolder.TryDecrementAmount(ShopItem.Boost))
+        if (DataHolder.TryDecrementAmount(Bonus.Boost))
         {
             StartCoroutine(Boost());
         }
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
 
     public void UseExtraLive()
     {
-        if (DataHolder.TryDecrementAmount(ShopItem.Life))
+        if (DataHolder.TryDecrementAmount(Bonus.Life))
         {
             TimeManager.Instance.TimeCount = SettingsManager.Instance.startTimeCount;
             ResumeGame();

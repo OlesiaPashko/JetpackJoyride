@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopItemUI : MonoBehaviour
+public class BonusItemUI : MonoBehaviour
 {
     public Text name;
     public Text price;
@@ -11,12 +9,12 @@ public class ShopItemUI : MonoBehaviour
     public Image image;
     public Button buy;
 
-    private ShopItemDetails currentItem;
-    public void Init(ShopItemDetails itemDetails)
+    private BonusDetails currentItem;
+    public void Init(BonusDetails itemDetails)
     {
         currentItem = itemDetails;
         price.text = itemDetails.Price.ToString();
-        name.text = itemDetails.ShopItem.ToString();
+        name.text = itemDetails.Bonus.ToString();
         amount.text = itemDetails.Amount.ToString();
         image.sprite = itemDetails.Image;
         buy.onClick.AddListener(Buy);
@@ -24,17 +22,17 @@ public class ShopItemUI : MonoBehaviour
 
     private void Buy()
     {
-        Debug.Log("Buy");
+        //Check is money is enough
         if (DataHolder.TrySubtractCoinsCount(currentItem.Price))
         {
-            DataHolder.IncrementAmount(currentItem.ShopItem);
+            //Increment amount of bonus
+            DataHolder.IncrementAmount(currentItem.Bonus);
             currentItem.Amount++;
-            //coinsCount.text = DataHolder.GetCoinsCount().ToString();
             amount.text = currentItem.Amount.ToString();
         }
         else
         {
-            Debug.Log("You have not enough coins to buy " + currentItem.ShopItem);
+            Debug.Log("You have not enough coins to buy " + currentItem.Bonus);
         }
     }
 }
