@@ -19,15 +19,18 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
+        //Set animation
         animator.SetBool("isGrounded", groundDetector.isGrounded);
 
         MoveForward();
 
+        //Jump on jump input
         if (Input.GetButton("Jump"))
         {
             rigidbody.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
         }
 
+        //Add score
         GameManager.Instance.Score += speed * Time.deltaTime;
     }
 

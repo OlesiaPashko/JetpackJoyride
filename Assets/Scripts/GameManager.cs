@@ -69,25 +69,32 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Boost()
     {
+        //Boost player
         player.gameObject.tag = "Disabled";
         player.speed += SettingsManager.Instance.startBoostAcceleration;
-        yield return new WaitForSeconds(SettingsManager.Instance.boostTime);
+        yield return new WaitForSeconds(SettingsManager.Instance.boostDuration);
 
+        //Change speed mode to normal
         player.speed -= SettingsManager.Instance.endBoostAcceleration;
         player.gameObject.tag = "Player";
+
+        //Use boosts if there are some more
         if (DataHolder.TryDecrementAmount(Bonus.Boost))
         {
             StartCoroutine(Boost());
         }
+
+        //Set time to start time amount
         TimeManager.Instance.TimeCount = SettingsManager.Instance.startTimeCount;
     }
 
     public void EndGame()
     {
+        //Set pause
         PauseGame();
-
         GameUIManager.Instance.GameOver(CoinsCount, Score);
 
+        //save coins ad score
         DataHolder.AddCoinsCount(CoinsCount);
         if (score > DataHolder.GetMaxScore())
             DataHolder.SetMaxScore((int)score);
@@ -129,12 +136,14 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        //Set coins and score to zero
         DataHolder.AddCoinsCount(CoinsCount);
         coinsCount = 0;
         score = 0f;
 
         Start();
 
+        //Set initial values
         TimeManager.Instance.TimeCount = SettingsManager.Instance.startTimeCount;
         player.speed = SettingsManager.Instance.startPlayerSpeed;
         SectionManager.Instance.Restart();

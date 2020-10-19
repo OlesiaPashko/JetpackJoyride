@@ -50,8 +50,8 @@ public class ShopUIManager : MonoBehaviour
     {
         bonuses = new List<BonusDetails>()
         {
-            new BonusDetails(){ Bonus = Bonus.Life, Amount = DataHolder.GetAmount(global::Bonus.Life), Image = bonusImages[0], Price = 20 },
-            new BonusDetails(){ Bonus = Bonus.Boost, Amount = DataHolder.GetAmount(global::Bonus.Boost), Image = bonusImages[1], Price = 20 } 
+            new BonusDetails(){ Bonus = Bonus.Life, Amount = DataHolder.GetAmount(Bonus.Life), Image = bonusImages[0], Price = 20 },
+            new BonusDetails(){ Bonus = Bonus.Boost, Amount = DataHolder.GetAmount(Bonus.Boost), Image = bonusImages[1], Price = 20 } 
         };
     }
 

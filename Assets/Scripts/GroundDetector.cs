@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundDetector : MonoBehaviour//controller || detector
+public class GroundDetector : MonoBehaviour
 {
     public bool isGrounded;
     private void OnCollisionEnter2D(Collision2D collision)

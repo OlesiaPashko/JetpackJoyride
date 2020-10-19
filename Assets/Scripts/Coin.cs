@@ -8,8 +8,7 @@ public class Coin : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Disabled"))
         {
-            GameManager gameManager = GameManager.Instance;
-            gameManager.CoinsCount++;
+            GameManager.Instance.CoinsCount++;
             Destroy(gameObject);
         }
     }

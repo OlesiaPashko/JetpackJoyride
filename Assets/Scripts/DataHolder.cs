@@ -7,7 +7,8 @@ public static class DataHolder
     static DataHolder()
     {
         SetBought(Skins.Default);
-        SetActiveSkin(Skins.Default);//this couses bug but I don`t know how make it better
+        if(!PlayerPrefs.HasKey("ActiveSkin"))
+            SetActiveSkin(Skins.Default);
     }
 
     public static Skins GetActiveSkin()

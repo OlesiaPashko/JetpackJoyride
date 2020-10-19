@@ -10,7 +10,6 @@ public class SectionManager : MonoBehaviour
     private List<Section> spawnedSections = new List<Section>();
     private static SectionManager _instance;
     public Player player;
-    public event Action OnSectionSpawned;
     public static SectionManager Instance { get { return _instance; } }
 
 
@@ -33,15 +32,16 @@ public class SectionManager : MonoBehaviour
     }
     public void SpawnSection()
     {
+        //Create new section
         Section newSection = Instantiate(SectionPrefabs[UnityEngine.Random.Range(0, SectionPrefabs.Length)]);
 
+        //Add new section to end of spawned sections line
         newSection.transform.position = GetPositionToSpawn();
         spawnedSections.Add(newSection);
 
+        //Remove first section
         Destroy(spawnedSections[0].gameObject);
         spawnedSections.RemoveAt(0);
-
-        OnSectionSpawned?.Invoke();
     }
 
     private Vector3 GetPositionToSpawn()
@@ -54,12 +54,17 @@ public class SectionManager : MonoBehaviour
 
     public void Restart()
     {
+        //Destroy all spawned sections
         foreach (var spawnedSection in spawnedSections)
         {
             Destroy(spawnedSection.gameObject);
         }
+        
+        //Restart spawning
         spawnedSections = new List<Section>();
         Start();
+
+        //Set player position
         player.gameObject.transform.position = spawnedSections[1].transform.position + SettingsManager.Instance.startPlayerPosition;
     }
 }

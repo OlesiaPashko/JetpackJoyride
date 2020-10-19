@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1984715141532449614}
   - component: {fileID: 1984715141532449615}
   - component: {fileID: 1984715141532449608}
-  - component: {fileID: 1479567722}
   - component: {fileID: 182853267698821024}
+  - component: {fileID: 2131816377383929828}
   m_Layer: 0
   m_Name: rocket
   m_TagString: Untagged
@@ -122,8 +122,8 @@ MonoBehaviour:
   speed: 1
   rigidbody: {fileID: 1984715141532449614}
   animator: {fileID: 182853267698821024}
-  player: {fileID: 0}
   isWarning: 1
+  player: {fileID: 0}
 --- !u!61 &1984715141532449608
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -150,18 +150,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.541626, y: 0.6076546}
   m_EdgeRadius: 0
---- !u!114 &1479567722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984715141532449611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad4f6547d7701004b943dda04a67f17f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &182853267698821024
 Animator:
   serializedVersion: 3
@@ -181,3 +169,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2131816377383929828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984715141532449611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad4f6547d7701004b943dda04a67f17f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

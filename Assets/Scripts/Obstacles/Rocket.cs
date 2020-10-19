@@ -7,40 +7,52 @@ public class Rocket : MonoBehaviour
     public float speed = 0.25f;
     public Rigidbody2D rigidbody;
     public Animator animator;
-    public Player player;
-    public bool isWarning = true;
+    public bool isWarning;
+    public Transform player;
     void Start()
     {
-        player = FindObjectOfType<Player>();
-        if (player.gameObject.CompareTag("Disabled"))//there are no rockets in boost mode
-        {
-            Destroy(gameObject);
-            return;
-        }
+        isWarning = true;
         StartCoroutine(RocketBehavior());
+    }
+
+    public void SetPlayer(Transform player)
+    {
+        this.player = player;
     }
 
     public IEnumerator RocketBehavior()
     {
-            Vector3 direction = Vector3.left * speed;
-            direction.y = rigidbody.velocity.y;
-            rigidbody.velocity = direction;
-            yield return new WaitForSeconds(SettingsManager.Instance.rocketTime);
+        //Showing warning
+        yield return new WaitForSeconds(SettingsManager.Instance.rocketDuration);
 
-            isWarning = false;
-            animator.SetTrigger("StartFly");
-            yield return new WaitForSeconds(SettingsManager.Instance.rocketTime);
+        //Showing and moving rocket
+        MoveForward();
+        isWarning = false;
+        animator.SetTrigger("StartFly");
 
-            Destroy(gameObject);
+        //Destroy with delay
+        yield return new WaitForSeconds(SettingsManager.Instance.rocketDuration);
+        Destroy(gameObject);
+    }
+
+    private void MoveForward()
+    {
+        transform.position += new Vector3(3f, 0f, 0f);
+
+        Vector3 direction = Vector3.left * speed;
+        direction.y = rigidbody.velocity.y;
+        rigidbody.velocity = direction;
     }
 
     private void Update()
     {
         if (isWarning)
         {
-            var playerPos = player.gameObject.transform.position;
-            float distanceToPlayer = 15f;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPos.x + distanceToPlayer, playerPos.y, transform.position.z), 10);
+            //Move warning towards player
+            Vector3 offset = new Vector3(15f, 0f, 0f);
+            Vector3 position = player.position + offset;
+            position.z = 0;
+            transform.position = Vector3.MoveTowards(transform.position, position, 10);
         }
     }
 }

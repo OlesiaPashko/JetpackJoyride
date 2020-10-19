@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameUIManager : MonoBehaviour
 {
     private static GameUIManager _instance;
-    public Canvas gameOverCanvas;
+    public GameOverCanvas gameOverCanvas;
     public Text coinsCount;
     public Text score;
     public Text time;
@@ -52,7 +52,7 @@ public class GameUIManager : MonoBehaviour
     IEnumerator TimeFineCoroutine()
     {
         timeFine.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(SettingsManager.Instance.timeMessageDuration);
         timeFine.gameObject.SetActive(false);
     }
 
@@ -64,16 +64,14 @@ public class GameUIManager : MonoBehaviour
     IEnumerator TimeBonusCoroutine()
     {
         timeBonus.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(SettingsManager.Instance.timeMessageDuration);
         timeBonus.gameObject.SetActive(false);
     }
     public void GameOver(int coins, float score)
     {
         gameOverCanvas.gameObject.SetActive(true);
-        Text[] texts = gameOverCanvas.GetComponentsInChildren<Text>();
-        texts.First(x => x.name == "CoinsCount").text = coins.ToString();
-        texts.First(x => x.name == "LivesCount").text = DataHolder.GetAmount(Bonus.Life).ToString();
-        texts.First(x => x.name == "Score").text = ((int)score).ToString();
+        gameOverCanvas.Init(coins, score);
+        
     }
 
     public void GameOn()

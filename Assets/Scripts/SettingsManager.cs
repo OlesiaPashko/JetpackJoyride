@@ -7,20 +7,21 @@ public class SettingsManager : MonoBehaviour
     private static SettingsManager _instance;
     public static SettingsManager Instance { get { return _instance; } }
 
-    public float startBoostAcceleration = 60f;
-    public float endBoostAcceleration = 51.5f;//boost speed minus player acceleration
-    public float boostTime = 7.5f;
+    public float startBoostAcceleration;
+    public float endBoostAcceleration;//boost speed minus player acceleration
+    public float boostDuration;
 
-    public float startTimeCount = 30f;
+    public float startTimeCount;
 
-    public float startPlayerSpeed = 4.5f;
-    public Vector3 startPlayerPosition = new Vector3(4f, 5f, 0f);
+    public float startPlayerSpeed;
+    public Vector3 startPlayerPosition;
 
-    public int obstacleTimeFine = 10;
-    public int timeBonus = 5;
+    public int obstacleTimeFine;
+    public int timeBonus;
+    public float timeMessageDuration;
 
-    public float rocketTime = 3f;
-    public float timingLaserTime = 2f;
+    public float rocketDuration;
+    public float timingLaserTime;
 
     private void Awake()
     {
