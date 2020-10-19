@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class GameUIManager : MonoBehaviour
     public Canvas gameOverCanvas;
     public Text coinsCountText;
     public Text scoreText;
+    public Text timeText;
 
     public static GameUIManager Instance { get { return _instance; } }
 
@@ -33,6 +35,12 @@ public class GameUIManager : MonoBehaviour
     public void SetCoinsCount(int coins)
     {
         coinsCountText.text = coins.ToString();
+    }
+
+    public void SetTimeCount(float time)
+    {
+        TimeSpan span = TimeSpan.FromSeconds((double)(new decimal(time)));
+        timeText.text = span.ToString(@"mm\:ss");
     }
     public void GameOver(int coins, float score)
     {

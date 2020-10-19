@@ -11,15 +11,14 @@ public class TimeManager : MonoBehaviour
     public static TimeManager Instance { get { return _instance; } }
 
     private float time = SettingsManager.Instance.startTimeCount;
-    public Text timeText;
+    
     [SerializeField] public float TimeCount 
     { 
         get { return time; } 
         set 
         { 
             time = value;
-            TimeSpan span = TimeSpan.FromSeconds((double)(new decimal(time)));
-            timeText.text = span.ToString(@"mm\:ss"); 
+            GameUIManager.Instance.SetTimeCount(value);
         } 
     }
 

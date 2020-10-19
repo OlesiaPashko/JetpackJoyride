@@ -713,7 +713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf094cdc06836f8478beef471df375df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 2003126528}
 --- !u!4 &306883884
 Transform:
   m_ObjectHideFlags: 0
@@ -1316,6 +1315,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 689302405}
   coinsCountText: {fileID: 1189892290}
   scoreText: {fileID: 438039961}
+  timeText: {fileID: 2003126528}
 --- !u!4 &693095360
 Transform:
   m_ObjectHideFlags: 0
@@ -1568,8 +1568,11 @@ MonoBehaviour:
   boostTime: 7.5
   startTimeCount: 30
   startPlayerSpeed: 4.5
+  startPlayerPosition: {x: 4, y: 5, z: 0}
   obstacleTimeFine: 10
+  timeBonus: 5
   rocketTime: 3
+  timingLaserTime: 2
 --- !u!4 &800197383
 Transform:
   m_ObjectHideFlags: 0
