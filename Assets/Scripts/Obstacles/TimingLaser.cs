@@ -5,29 +5,32 @@ using VolumetricLines;
 public class TimingLaser : MonoBehaviour
 {
     VolumetricLineBehavior volumetricLineBehavior;
-    public Player player;
+    public Transform cameraPivot;
     public float distance;
     void Start()
     {
         volumetricLineBehavior = GetComponent<VolumetricLineBehavior>();
-        player = FindObjectOfType<Player>();
+        cameraPivot = Camera.main.transform;
         StartCoroutine(BehaviorCoroutine());
     }
 
     IEnumerator BehaviorCoroutine()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(SettingsManager.Instance.timingLaserTime);
 
-        volumetricLineBehavior.LineWidth = 2f;
+        float bigLineWidth = 2f;
+        volumetricLineBehavior.LineWidth = bigLineWidth;
         this.gameObject.AddComponent<Obstacle>();
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(SettingsManager.Instance.timingLaserTime);
         Destroy(gameObject);
     }
 
     private void FixedUpdate()
     {
-        var playerPos = player.gameObject.transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPos.x+2.5f, transform.position.y, transform.position.z), distance);
+        Vector3 laserOffset = new Vector3(-5f, 0f, 0f);
+        Vector3 position = cameraPivot.position + laserOffset;
+        position.z = 0;
+        transform.position = Vector3.MoveTowards(transform.position, position, distance);
     }
 }

@@ -9,7 +9,7 @@ public class Obstacle : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             TimeManager timeManager = TimeManager.Instance;
-            timeManager.ReduceTime(10);
+            timeManager.ReduceTime(SettingsManager.Instance.obstacleTimeFine);
         }
     }
 }

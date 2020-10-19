@@ -10,7 +10,7 @@ public class TimeManager : MonoBehaviour
 
     public static TimeManager Instance { get { return _instance; } }
 
-    private float time = 30f;
+    private float time = SettingsManager.Instance.startTimeCount;
     public Text timeText;
     [SerializeField] public float TimeCount 
     { 

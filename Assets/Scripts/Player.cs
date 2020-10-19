@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 4.5f;
+    public float speed = SettingsManager.Instance.startPlayerSpeed;
     public float upForce = 1;
     public Rigidbody2D rigidbody;
     public float acceleration = 0.001f;
-    public GroundDetection groundDetection;
+    public GroundDetector groundDetector;
     public Animator animator;
     public AnimatorOverrideController knightAnimator;
     void Start()
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        animator.SetBool("isGrounded", groundDetection.isGrounded);
+        animator.SetBool("isGrounded", groundDetector.isGrounded);
 
         MoveForward();
 

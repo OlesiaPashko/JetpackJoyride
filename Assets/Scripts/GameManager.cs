@@ -9,11 +9,9 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     private int coinsCount = 0;
-    public Canvas gameOverCanvas;
     public bool isPause = false;
     private float score = 0f;
-    public Text coinsCountText;
-    public Text scoreText;
+   
     public Player player;
     public float Score
     {
@@ -21,7 +19,7 @@ public class GameManager : MonoBehaviour
         set
         {
             score = value;
-            scoreText.text = ((int)score).ToString();
+            GameUIManager.Instance.SetScore(Score);
         }
     }
     public int CoinsCount
@@ -30,7 +28,7 @@ public class GameManager : MonoBehaviour
         set
         {
             coinsCount = value;
-            coinsCountText.text = coinsCount.ToString();
+            GameUIManager.Instance.SetCoinsCount(CoinsCount);
         }
     } 
     
@@ -54,7 +52,7 @@ public class GameManager : MonoBehaviour
     {
         isPause = false;
         Time.timeScale = 1;
-        gameOverCanvas.gameObject.SetActive(false);
+        GameUIManager.Instance.GameOn();
 
         UseBoosts();
     }
@@ -72,30 +70,26 @@ public class GameManager : MonoBehaviour
     private IEnumerator Boost()
     {
         player.gameObject.tag = "Disabled";
-        player.speed += 60f;
-        yield return new WaitForSeconds(7.5f);
+        player.speed += SettingsManager.Instance.startBoostAcceleration;
+        yield return new WaitForSeconds(SettingsManager.Instance.boostTime);
 
-        player.speed -= 51.5f;//boost speed minus acceleration
+        player.speed -= SettingsManager.Instance.endBoostAcceleration;
         player.gameObject.tag = "Player";
         if (DataHolder.TryDecrementAmount(ShopItem.Boost))
         {
             StartCoroutine(Boost());
         }
-        TimeManager.Instance.TimeCount = 30f;
+        TimeManager.Instance.TimeCount = SettingsManager.Instance.startTimeCount;
     }
 
     public void EndGame()
     {
         PauseGame();
 
-        gameOverCanvas.gameObject.SetActive(true);
-        Text[] texts = gameOverCanvas.GetComponentsInChildren<Text>();
-        texts.First(x => x.name == "CoinsCount").text = CoinsCount.ToString();
-        texts.First(x => x.name == "LivesCount").text = DataHolder.GetAmount(ShopItem.Life).ToString();
-        texts.First(x => x.name == "Score").text = ((int)score).ToString();
+        GameUIManager.Instance.GameOver(CoinsCount, Score);
 
         DataHolder.AddCoinsCount(CoinsCount);
-        if (IsMaxScore())
+        if (score > DataHolder.GetMaxScore())
             DataHolder.SetMaxScore((int)score);
     }
 
@@ -115,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        gameOverCanvas.gameObject.SetActive(false);
+        GameUIManager.Instance.GameOn();
         isPause = false;
         Time.timeScale = 1;
     }
@@ -124,7 +118,7 @@ public class GameManager : MonoBehaviour
     {
         if (DataHolder.TryDecrementAmount(ShopItem.Life))
         {
-            TimeManager.Instance.TimeCount = 30;
+            TimeManager.Instance.TimeCount = SettingsManager.Instance.startTimeCount;
             ResumeGame();
         }
         else
@@ -141,14 +135,9 @@ public class GameManager : MonoBehaviour
 
         Start();
 
-        TimeManager.Instance.TimeCount = 30f;
-        player.speed = 4.5f;
+        TimeManager.Instance.TimeCount = SettingsManager.Instance.startTimeCount;
+        player.speed = SettingsManager.Instance.startPlayerSpeed;
         SectionManager.Instance.Restart();
-    }
-
-    private bool IsMaxScore()
-    {
-        return (score > DataHolder.GetMaxScore());
     }
 
     public void GoToMenu()

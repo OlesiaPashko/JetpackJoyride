@@ -25,11 +25,11 @@ public class Rocket : MonoBehaviour
             Vector3 direction = Vector3.left * speed;
             direction.y = rigidbody.velocity.y;
             rigidbody.velocity = direction;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(SettingsManager.Instance.rocketTime);
 
             isWarning = false;
             animator.SetTrigger("StartFly");
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(SettingsManager.Instance.rocketTime);
 
             Destroy(gameObject);
     }
@@ -39,7 +39,8 @@ public class Rocket : MonoBehaviour
         if (isWarning)
         {
             var playerPos = player.gameObject.transform.position;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPos.x + 15f, playerPos.y, transform.position.z), 10);
+            float distanceToPlayer = 15f;
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPos.x + distanceToPlayer, playerPos.y, transform.position.z), 10);
         }
     }
 }

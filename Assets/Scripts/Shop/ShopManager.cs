@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ShopManager : MonoBehaviour
+public class ShopManager : MonoBehaviour//shopUiManager
 {
 
     public GameObject ShopItem;
@@ -62,17 +62,21 @@ public class ShopManager : MonoBehaviour
 
     private void BuySkin(Skins skin)
     {
+        //Check if money is enought
         if (DataHolder.TrySubtractCoinsCount(skins[skin].Price))
         {
+            //Mark skin as bought
             skins[skin].isBought = true;
             DataHolder.SetBought(skin);
             coinsCount.text = DataHolder.GetCoinsCount().ToString();
 
+            //Show bought item
             Button[] buttons = spawnedSkins[skin].GetComponentsInChildren<Button>(true);
             buttons.First(x => x.name == "Buy").gameObject.SetActive(false);
             buttons.First(x => x.name == "Use").gameObject.SetActive(true);
             spawnedSkins[skin].GetComponentsInChildren<Text>().First(x => x.name == "Price").enabled = false;
 
+            //Apply skin
             UseSkin(skin);
         }
         else
@@ -104,7 +108,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private void SetItems()
+    private void SetItems() 
     {
         items = new Dictionary<ShopItem, ShopItemDetails>()
         {

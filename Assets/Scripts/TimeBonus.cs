@@ -9,7 +9,7 @@ public class TimeBonus : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             TimeManager timeManager = TimeManager.Instance;
-            timeManager.AddTime(5);
+            timeManager.AddTime(SettingsManager.Instance.timeBonus);
             Destroy(gameObject);
         }
     }

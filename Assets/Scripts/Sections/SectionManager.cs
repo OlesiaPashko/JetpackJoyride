@@ -10,7 +10,7 @@ public class SectionManager : MonoBehaviour
     private List<Section> spawnedSections = new List<Section>();
     private static SectionManager _instance;
     public Player player;
-    public event Action SpawnObstacles;
+    public event Action OnSectionSpawned;
     public static SectionManager Instance { get { return _instance; } }
 
 
@@ -41,7 +41,7 @@ public class SectionManager : MonoBehaviour
         Destroy(spawnedSections[0].gameObject);
         spawnedSections.RemoveAt(0);
 
-        SpawnObstacles?.Invoke();
+        OnSectionSpawned?.Invoke();
     }
 
     private Vector3 GetPositionToSpawn()
@@ -54,12 +54,12 @@ public class SectionManager : MonoBehaviour
 
     public void Restart()
     {
-        foreach(var spawnedSection in spawnedSections)
+        foreach (var spawnedSection in spawnedSections)
         {
             Destroy(spawnedSection.gameObject);
         }
         spawnedSections = new List<Section>();
         Start();
-        player.gameObject.transform.position = spawnedSections[1].transform.position + new Vector3(4f, 5f, 0f);
+        player.gameObject.transform.position = spawnedSections[1].transform.position + SettingsManager.Instance.startPlayerPosition;
     }
 }
