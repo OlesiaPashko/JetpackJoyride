@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SkinDetails
 {
-    public bool isBought = false;
+    public Skins Skin;
+    public bool IsBought = false;
     public int Price = 0;
     public Sprite Image;
 }

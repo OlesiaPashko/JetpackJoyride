@@ -8,16 +8,15 @@ using UnityEngine.UI;
 public class ShopManager : MonoBehaviour//shopUiManager
 {
 
-    public GameObject ShopItem;
-    public GameObject skinItem;
+    public ShopItemUI shopItem;
+    public SkinItemUI skinItem;
     public Canvas canvas;
     public Sprite[] sprites;
     public Sprite[] skinImages;
     public Text coinsCount;
-    private Dictionary<ShopItem, ShopItemDetails> items;
-    private Dictionary<ShopItem, GameObject> spawnedItems = new Dictionary<ShopItem, GameObject>();
-    private Dictionary<Skins, SkinDetails> skins;
-    private Dictionary<Skins, GameObject> spawnedSkins = new Dictionary<Skins, GameObject>();
+    private List<ShopItemDetails> items;
+    private List<SkinDetails> skins;
+
     private Skins activeSkin;
 
     void Start()
@@ -32,6 +31,11 @@ public class ShopManager : MonoBehaviour//shopUiManager
         SpawnSkins();
     }
 
+    private void Update()
+    {
+        coinsCount.text = DataHolder.GetCoinsCount().ToString();
+    }
+
 
     public void StartGame()
     {
@@ -43,22 +47,7 @@ public class ShopManager : MonoBehaviour//shopUiManager
         SceneManager.LoadScene("MainMenu");
     }
 
-    private void Buy(ShopItem shopItem)
-    {
-        var item = items[shopItem];
-        if (DataHolder.TrySubtractCoinsCount(item.Price))
-        {
-            items[shopItem].Amount++;
-            DataHolder.IncrementAmount(shopItem);
-
-            coinsCount.text = DataHolder.GetCoinsCount().ToString();
-            spawnedItems[shopItem].GetComponentsInChildren<Text>().First(x => x.name == "Amount").text = item.Amount.ToString();
-        }
-        else
-        {
-            Debug.Log("You have not enough coins to buy " + shopItem);
-        }
-    }
+    /*
 
     private void BuySkin(Skins skin)
     {
@@ -107,13 +96,13 @@ public class ShopManager : MonoBehaviour//shopUiManager
             Debug.Log("You have not enough coins to buy " + skin);
         }
     }
-
+    */
     private void SetItems() 
     {
-        items = new Dictionary<ShopItem, ShopItemDetails>()
+        items = new List<ShopItemDetails>()
         {
-            { global::ShopItem.Life, new ShopItemDetails(){ Amount = DataHolder.GetAmount(global::ShopItem.Life), Image = sprites[0], Price = 20 } },
-            { global::ShopItem.Boost, new ShopItemDetails(){ Amount = DataHolder.GetAmount(global::ShopItem.Boost), Image = sprites[1], Price = 20 } }
+            new ShopItemDetails(){ ShopItem = ShopItem.Life, Amount = DataHolder.GetAmount(global::ShopItem.Life), Image = sprites[0], Price = 20 },
+            new ShopItemDetails(){ ShopItem = ShopItem.Boost, Amount = DataHolder.GetAmount(global::ShopItem.Boost), Image = sprites[1], Price = 20 } 
         };
     }
 
@@ -121,41 +110,29 @@ public class ShopManager : MonoBehaviour//shopUiManager
     {
         float scaleFactor = canvas.scaleFactor;
 
-        ShopItem.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+        shopItem.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
 
         float y = (canvas.pixelRect.y + (canvas.pixelRect.height / 2)) + 50f * scaleFactor;
         float xToSpawn = (canvas.pixelRect.x + (canvas.pixelRect.width / 2));
 
         foreach (var item in items)
         {
-            GameObject shopItem = Instantiate(ShopItem, new Vector3(xToSpawn, y, 0f), Quaternion.identity);
+            ShopItemUI itemUI = Instantiate(shopItem, new Vector3(xToSpawn, y, 0f), Quaternion.identity);
 
-            SetItemFields(shopItem, item);
+            itemUI.Init(item);
 
-            shopItem.transform.parent = canvas.transform;
+            itemUI.transform.parent = canvas.transform;
 
             y -= 50f * scaleFactor;
-
-            spawnedItems.Add(item.Key, shopItem);
         }
-    }
-
-    private void SetItemFields(GameObject shopItem, KeyValuePair<ShopItem, ShopItemDetails> item)
-    {
-        Text[] texts = shopItem.GetComponentsInChildren<Text>();
-        texts.First(x => x.name == "Price").text = item.Value.Price.ToString();
-        texts.First(x => x.name == "Name").text = item.Key.ToString();
-        texts.First(x => x.name == "Amount").text = item.Value.Amount.ToString();
-        shopItem.GetComponentsInChildren<Image>().First(x => x.name == "Image").sprite = item.Value.Image;
-        shopItem.GetComponentsInChildren<Button>().First(x => x.name == "Buy").onClick.AddListener(() => Buy(item.Key));
     }
 
     private void SetSkins()
     {
-        skins = new Dictionary<Skins, SkinDetails>()
+        skins = new List<SkinDetails>()
         {
-            { Skins.Default, new SkinDetails(){ Price = 0, isBought = true, Image = skinImages[0]}},
-            { Skins.Knight, new SkinDetails(){ Price = 100, isBought = DataHolder.IsBought(Skins.Knight), Image = skinImages[1]} }
+            new SkinDetails(){ Skin = Skins.Default, Price = 0, IsBought = true, Image = skinImages[0]},
+            new SkinDetails(){ Skin = Skins.Knight, Price = 100, IsBought = DataHolder.IsBought(Skins.Knight), Image = skinImages[1]}
         };
     }
 
@@ -168,27 +145,28 @@ public class ShopManager : MonoBehaviour//shopUiManager
 
         foreach (var skin in skins)
         {
-            GameObject skinObject = Instantiate(skinItem, new Vector3(xToSpawn, y, 0f), Quaternion.identity);
-            skinObject.GetComponentsInChildren<Text>().First(x => x.name == "Name").text = skin.Key.ToString();
-            skinObject.GetComponentsInChildren<Image>().First(x => x.name == "Image").sprite = skin.Value.Image;
+            SkinItemUI skinObject = Instantiate(skinItem, new Vector3(xToSpawn, y, 0f), Quaternion.identity);
+            //skinObject.GetComponentsInChildren<Text>().First(x => x.name == "Name").text = skin.Key.ToString();
+            //skinObject.GetComponentsInChildren<Image>().First(x => x.name == "Image").sprite = skin.Value.Image;
 
-            AddSkinsButtonsListeners(skinObject, skin.Key);
+            ///AddSkinsButtonsListeners(skinObject, skin.Key);
 
-            if (skin.Value.isBought)
-            {
-                SpawnBoughtSkin(skin.Key, skinObject);
-            }
-            else
-            {
-                SpawnNotBoughtSkin(skin, skinObject);
-            }
+            //if (skin.Value.isBought)
+            //{
+            //    SpawnBoughtSkin(skin.Key, skinObject);
+            //}
+            //else
+            //{
+            //    SpawnNotBoughtSkin(skin, skinObject);
+            //}
+            skinObject.Init(skin);
             skinObject.transform.parent = canvas.transform;
             y -= 50f * scaleFactor;
-            spawnedSkins.Add(skin.Key, skinObject);
+            //spawnedSkins.Add(skin.Key, skinObject);
         }
     }
 
-    private void AddSkinsButtonsListeners(GameObject skinObject, Skins skin)
+    /*private void AddSkinsButtonsListeners(GameObject skinObject, Skins skin)
     {
         var useButton = skinObject.GetComponentsInChildren<Button>().First(x => x.name == "Use");
         useButton.onClick.AddListener(() => UseSkin(skin));
@@ -211,6 +189,6 @@ public class ShopManager : MonoBehaviour//shopUiManager
     {
         skinObject.GetComponentsInChildren<Text>().First(x => x.name == "Price").text = skin.Value.Price.ToString();
         skinObject.GetComponentsInChildren<Button>().First(x => x.name == "Use").gameObject.SetActive(false);
-    }
+    }*/
 
 }
