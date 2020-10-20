@@ -15,12 +15,15 @@ public class SettingsManager : MonoBehaviour
 
     public float startPlayerSpeed;
     public Vector3 startPlayerPosition;
+    public float playerAcceleration;
+    public float playerUpForce;
 
     public int obstacleTimeFine;
     public int timeBonus;
     public float timeMessageDuration;
 
     public float rocketDuration;
+    public float rocketPause;
     public float timingLaserTime;
 
     private void Awake()

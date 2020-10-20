@@ -166,11 +166,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startBoostAcceleration: 60
   endBoostAcceleration: 51.5
-  boostTime: 7.5
+  boostDuration: 7.5
   startTimeCount: 30
   startPlayerSpeed: 4.5
+  startPlayerPosition: {x: 4, y: 5, z: 0}
+  playerAcceleration: 0.001
+  playerUpForce: 1
   obstacleTimeFine: 10
-  rocketTime: 3
+  timeBonus: 5
+  timeMessageDuration: 1
+  rocketDuration: 3
+  rocketPause: 3
+  timingLaserTime: 2
 --- !u!1 &1624519062
 GameObject:
   m_ObjectHideFlags: 0

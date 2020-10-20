@@ -5,9 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed = SettingsManager.Instance.startPlayerSpeed;
-    public float upForce = 1;
     public Rigidbody2D rigidbody;
-    public float acceleration = 0.001f;
     public GroundDetector groundDetector;
     public Animator animator;
     public AnimatorOverrideController knightAnimator;
@@ -27,7 +25,7 @@ public class Player : MonoBehaviour
         //Jump on jump input
         if (Input.GetButton("Jump"))
         {
-            rigidbody.AddForce(Vector2.up * upForce, ForceMode2D.Impulse);
+            rigidbody.AddForce(Vector2.up * SettingsManager.Instance.playerUpForce, ForceMode2D.Impulse);
         }
 
         //Add score
@@ -36,7 +34,7 @@ public class Player : MonoBehaviour
 
     private void MoveForward()
     {
-        speed += acceleration;
+        speed += SettingsManager.Instance.playerAcceleration;
         Vector3 direction = Vector3.right * speed;
         direction.y = rigidbody.velocity.y;
         rigidbody.velocity = direction;

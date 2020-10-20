@@ -8,20 +8,20 @@ public class SectionManager : MonoBehaviour
     public Section[] SectionPrefabs;
     public Section[] FirstPrefabs;
     private List<Section> spawnedSections = new List<Section>();
-    private static SectionManager _instance;
+    private static SectionManager instance;
     public Player player;
-    public static SectionManager Instance { get { return _instance; } }
+    public static SectionManager Instance { get { return instance; } }
 
 
     private void Awake()
     {
-        if (_instance != null && _instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            _instance = this;
+            instance = this;
         }
     }
 

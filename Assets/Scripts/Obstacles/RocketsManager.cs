@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RocketsManager : MonoBehaviour
 {
-    public Rocket RocketPrefab;
+    public Rocket rocketPrefab;
     public Player player;
     void Start()
     {
@@ -14,18 +14,18 @@ public class RocketsManager : MonoBehaviour
     private IEnumerator SpawnRocketCoroutine()
     {
         //Set probability of rocket spawn to 1/5
-        int rndNumber = Random.Range(1, 6);
-        bool shoultRocketSpawns = (rndNumber % 5) == 0;
+        int randomNumber = Random.Range(1, 6);
+        bool shoultRocketSpawns = (randomNumber % 5) == 0;
 
         if (shoultRocketSpawns)
         {
             //Spawn rocket
-            Rocket rocket = Instantiate(RocketPrefab, gameObject.transform.position, Quaternion.identity);
+            Rocket rocket = Instantiate(rocketPrefab, gameObject.transform.position, Quaternion.identity);
             rocket.SetPlayer(player.transform);
         }
         
         //Start it once again with delay
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(SettingsManager.Instance.rocketPause);
         StartCoroutine(SpawnRocketCoroutine());
     }
 }

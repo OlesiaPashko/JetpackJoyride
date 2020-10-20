@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance;
+    private static GameManager instance;
     private int coinsCount = 0;
     public bool isPause = false;
     private float score = 0f;
@@ -33,18 +33,18 @@ public class GameManager : MonoBehaviour
     } 
     
 
-    public static GameManager Instance { get { return _instance; } }
+    public static GameManager Instance { get { return instance; } }
 
 
     private void Awake()
     {
-        if (_instance != null && _instance != this)
+        if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            _instance = this;
+            instance = this;
         }
     }
 

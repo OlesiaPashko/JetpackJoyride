@@ -1079,7 +1079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde0ceb4a15045c4ea8286ca83389d57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RocketPrefab: {fileID: 1984715141532449615, guid: 32c2c96092515bd4cb11020c6a9c0502,
+  rocketPrefab: {fileID: 1984715141532449615, guid: 32c2c96092515bd4cb11020c6a9c0502,
     type: 3}
   player: {fileID: 1583075439}
 --- !u!114 &519420034
@@ -2546,9 +2546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4.5
-  upForce: 0.7
   rigidbody: {fileID: 1583075440}
-  acceleration: 0.001
   groundDetector: {fileID: 1583075443}
   animator: {fileID: 1583075442}
   knightAnimator: {fileID: 22100000, guid: 3ebbc282bcde076419424363e5559887, type: 2}
