@@ -11,3 +11,8 @@ In the game player can avoid obstacles and get coins. The player receives a time
 Score is calculated based on meters that player has run.<br />
 
 Player has to get time bonuses to continue game because game is over when player\`s time gets equal to zero.<br />
+
+![Knight with rocket](https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/RocketKnight.png)
+![Knight running](https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/CautionAndTimeLazer.png)
+![Default player running](https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/DefaultPlayerRocket.png)
+![Default player with](https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/DefaultPlayerTimeLazer.png)
