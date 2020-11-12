@@ -23,4 +23,6 @@ Player has to get time bonuses to continue game because game is over when player
 
 There is ability to buy bonus lives and boosts. Also we can buy knight skin. After buy we can use knight or default skin.
 
-![Main menu](https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/Shop.png)
+![Shop](https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/Shop.png)
+## Game over scene
+![Game over](https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/GameOverMenu.png)
