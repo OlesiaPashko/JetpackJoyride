@@ -18,7 +18,9 @@ Player has to get time bonuses to continue game because game is over when player
 ![Default player with](https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/DefaultPlayerTimeLazer.png)
 
 ## Main menu scene
-![Main menu]https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/MainMenu.png)
+![Main menu](https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/MainMenu.png)
 ## Shop scene
-There is ability to buy bonus lives and boosts. Also we can buy knight skin. After buy we can use it or default skin.
+
+There is ability to buy bonus lives and boosts. Also we can buy knight skin. After buy we can use knight or default skin.
+
 ![Main menu](https://github.com/OlesiaPashko/JetpackJoyride/blob/main/Screenshots/Shop.png)
